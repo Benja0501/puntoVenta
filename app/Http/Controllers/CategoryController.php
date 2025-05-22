@@ -32,7 +32,7 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        //
+        return view('admin.category.show', compact('category'));
     }
 
     public function update(UpdateCategoryRequest $request, Category $category)
@@ -43,6 +43,7 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('categories.index')->with('success', 'Category deleted successfully');
     }
 }
