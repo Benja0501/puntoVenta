@@ -23,7 +23,7 @@ class StoreCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:50',
-            'description' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
         ];
     }
 
@@ -33,7 +33,7 @@ class StoreCategoryRequest extends FormRequest
             'name.required' => 'Este campo es requerido.',
             'name.string' => 'El valor no es correcto.',
             'name.max' => 'Solo se permiten 50 caracteres.',
-            'description.required' => 'Este campo es requerido.',
+            // 'description.required' => 'Este campo es requerido.',
             'description.string' => 'El valor no es correcto.',
             'description.max' => 'Solo se permiten 255 caracteres.',
         ];
