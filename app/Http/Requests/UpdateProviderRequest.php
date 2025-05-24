@@ -22,7 +22,7 @@ class UpdateProviderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:providers,name,'.$this->route('provider')->id,
             'email' => 'required|email|unique:providers,email,'.$this->route('provider')->id.'|string|max:255',
             'ruc_number' => 'required|string|max:11|min:11|unique:providers,ruc_number,'.$this->route('provider')->id,
             'address' => 'nullable|string|max:255',
@@ -35,6 +35,7 @@ class UpdateProviderRequest extends FormRequest
             'name.required' => 'Este campo es requerido.',
             'name.string' => 'El valor no es correcto.',
             'name.max' => 'Solo se permiten 255 caracteres.',
+            'name.unique' => 'El proveedor ya existe.',
             
             'email.required' => 'Este campo es requerido.',
             'email.email' => 'El valor no es correcto.',

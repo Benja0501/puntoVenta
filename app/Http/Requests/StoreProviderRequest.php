@@ -22,7 +22,7 @@ class StoreProviderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:providers,name',
             'email' => 'required|email|unique:providers,email|string|max:255',
             'ruc_number' => 'required|string|max:11|min:11|unique:providers,ruc_number',
             'address' => 'nullable|string|max:255',
@@ -36,6 +36,7 @@ class StoreProviderRequest extends FormRequest
             'name.required' => 'Este campo es requerido.',
             'name.string' => 'El valor no es correcto.',
             'name.max' => 'Solo se permiten 255 caracteres.',
+            'name.unique' => 'El proveedor ya existe.',
             
             'email.required' => 'Este campo es requerido.',
             'email.email' => 'El valor no es correcto.',

@@ -22,7 +22,7 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:50',
+            'name' => 'required|string|max:50|unique:categories,name',
             'description' => 'nullable|string|max:255',
         ];
     }
@@ -33,6 +33,8 @@ class StoreCategoryRequest extends FormRequest
             'name.required' => 'Este campo es requerido.',
             'name.string' => 'El valor no es correcto.',
             'name.max' => 'Solo se permiten 50 caracteres.',
+            'name.unique' => 'La categoría ya existe.',
+            
             'description.string' => 'El valor no es correcto.',
             'description.max' => 'Solo se permiten 255 caracteres.',
         ];
