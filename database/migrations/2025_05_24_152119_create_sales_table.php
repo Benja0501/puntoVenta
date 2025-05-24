@@ -10,14 +10,16 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBigInteger('client_id');
             $table->foreign('client_id')->references('id')->on('clients');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->datetime('sale_date');
             $table->decimal('tax');
-            $table->total('total');
+            $table->decimal('total');
             $table->enum('status', ['VALID', 'CANCELED'])->default('VALID');
+
             $table->timestamps();
         });
     }
