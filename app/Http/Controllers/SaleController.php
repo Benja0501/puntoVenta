@@ -3,62 +3,54 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sale;
+use App\Models\Client;
 use App\Http\Requests\StoreSaleRequest;
 use App\Http\Requests\UpdateSaleRequest;
 
 class SaleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $sale = Sale::get();
+        return view('admin.sale.index', compact('sale'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $clients = Client::get();
+        return view('admin.sale.create', compact('clients'));   
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreSaleRequest $request)
     {
-        //
+        $sale = Sale::create($request->all());
+
+        foreach ($request->product_id as $key => $product) {
+            $results[] = array("product_id" => $request->product_id[$key], 
+            "quantity" => $request->quantity[$key], "price" => $request->price[$key],
+            "discount" => $request->discount[$key]);
+        }
+        $sale->saleDetails()->createMany($results);
+
+        return redirect()->route('sales.index')->with('success', 'Sale created successfully');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Sale $sale)
     {
-        //
+        return view('admin.sale.show', compact('sale'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Sale $sale)
     {
-        //
+        $clients = Client::get();
+        return view('admin.sale.show', compact('sale', 'clients'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateSaleRequest $request, Sale $sale)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Sale $sale)
     {
         //

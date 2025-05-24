@@ -29,7 +29,7 @@ class PurchaseController extends Controller
             $results[] = array("product_id" => $request->product_id[$key], 
             "quantity" => $request->quantity[$key], "price" => $request->price[$key]);
         }
-        $purchase->shoppingDetails()->createMany($results);
+        $purchase->purchaseDetails()->createMany($results);
 
         return redirect()->route('purchases.index')->with('success', 'Purchase created successfully');
     }
