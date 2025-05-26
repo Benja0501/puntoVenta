@@ -18,12 +18,15 @@
         <nav class="mt-2">
             <!--begin::Sidebar Menu-->
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
+                {{-- Dashboard --}}
                 <li class="nav-item">
                     <a href="{{ route('dashboard') }}" class="nav-link active">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
+                {{-- Fin dashboard --}}
+                {{-- Categorias --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa-solid fa-box-archive"></i>
@@ -40,6 +43,13 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                {{-- Fin de categorias --}}
+                <li class="nav-item">
+                    <a href="{{ route('providers.index') }}" class="nav-link active">
+                        <i class="nav-icon bi bi-speedometer"></i>
+                        <p>Dashboard</p>
+                    </a>
                 </li>
             </ul>
             <!--end::Sidebar Menu-->

@@ -60,9 +60,18 @@
                                                 <tr>
                                                     <td>{{ $category->id }}</td>
                                                     <td>{{ $category->name }}</td>
-                                                    <td>{{ $category->description}}</td>
+                                                    <td>{{ $category->description }}</td>
                                                     <td>{{ $category->created_at->format('Y-m-d') }}</td>
                                                     <td>
+                                                        <button type="button" class="btn btn-sm btn-info"
+                                                            data-bs-toggle="modal" data-bs-target="#categoryModalShow"
+                                                            data-id="{{ $category->id }}"
+                                                            data-name="{{ $category->name }}"
+                                                            data-description="{{ $category->description }}"
+                                                            data-created_at="{{ $category->created_at->format('Y-m-d H:i:s') }}">
+                                                            <i class="fa fa-eye"></i>
+                                                        </button>
+
                                                         <a href="#" class="btn btn-sm btn-primary"
                                                             data-bs-toggle="modal" data-bs-target="#categoryModalEdit"
                                                             data-id="{{ $category->id }}"
@@ -104,6 +113,7 @@
 <!-- DataTables core JS -->
 @include('admin.category.create')
 @include('admin.category.edit')
+@include('admin.category.show')
 
 
 <!-- Tu script específico de categorías -->

@@ -33,7 +33,7 @@
                             <!--begin::Row-->
                             <div class="row">
                                 <div class="col-md-12">
-                                  <strong>Dashboard - Blank page</strong>
+                                    <strong>Dashboard - Blank page</strong>
                                 </div>
                             </div>
                             <!--end::Row-->

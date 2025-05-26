@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // ————— Tu DataTable como antes —————
     $("#tableCategorias").DataTable({
+        // dom: "Bfrtip",
         paging: true,
         ordering: true,
         info: true,
@@ -34,5 +35,21 @@ document.addEventListener("DOMContentLoaded", function () {
         // Rellenamos los inputs (asegúrate que los id aquí existan en el modal)
         editModal.querySelector("#editName").value = name;
         editModal.querySelector("#editDescription").value = description;
+    });
+
+    // ————— Ver categoría —————
+    var showModal = document.getElementById("categoryModalShow");
+    showModal.addEventListener("show.bs.modal", function (event) {
+        var btn = event.relatedTarget;
+        var id = btn.getAttribute("data-id");
+        var name = btn.getAttribute("data-name");
+        var desc = btn.getAttribute("data-description");
+        var created = btn.getAttribute("data-created_at");
+
+        // Rellenamos el modal
+        showModal.querySelector("#showId").textContent = id;
+        showModal.querySelector("#showName").textContent = name;
+        showModal.querySelector("#showDescription").textContent = desc;
+        showModal.querySelector("#showCreatedAt").textContent = created;
     });
 });
