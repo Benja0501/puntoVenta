@@ -32,7 +32,7 @@ class ClientController extends Controller
 
     public function edit(Client $client)
     {
-        return view('admin.client.show', compact('client'));
+        return view('admin.client.edit', compact('client'));
     }
 
     public function update(UpdateClientRequest $request, Client $client)

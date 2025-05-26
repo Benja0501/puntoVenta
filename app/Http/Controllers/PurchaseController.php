@@ -42,7 +42,7 @@ class PurchaseController extends Controller
     public function edit(Purchase $purchase)
     {
         $providers = Provider::get();
-        return view('admin.purchase.show', compact('purchase', 'providers'));
+        return view('admin.purchase.edit', compact('purchase', 'providers'));
     }
 
     public function update(UpdatePurchaseRequest $request, Purchase $purchase)
