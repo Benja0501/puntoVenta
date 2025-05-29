@@ -7,13 +7,21 @@ use App\Models\Category;
 use App\Models\Provider;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
     public function index()
     {
+        // Traemos los productos con su categoría y proveedor
         $products = Product::with(['category', 'provider'])->get();
-        return view('admin.product.index', compact('products'));
+        // Además traemos todas las categorías y proveedores
+        $categories = Category::all();
+        $providers = Provider::all();
+
+        // Ahora la vista admin.product.index tendrá disponibles:
+        // $products, $categories, $providers
+        return view('admin.product.index', compact('products', 'categories', 'providers'));
     }
 
     public function create()
@@ -25,8 +33,28 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request)
     {
-        Product::create($request->all());
-        return redirect()->route('products.index')->with('success', 'Product created successfully');
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            // Asegúrate de que existe public/assets/images
+            $imagesPath = public_path('assets/images');
+            if (!File::exists($imagesPath)) {
+                File::makeDirectory($imagesPath, 0755, true);
+            }
+
+            $img = $request->file('image');
+            $name = time() . '.' . $img->getClientOriginalExtension();
+            $img->move($imagesPath, $name);
+
+            // Guardamos la ruta relativa
+            $data['image'] = 'assets/images/' . $name;
+        }
+
+        Product::create($data);
+
+        return redirect()->route('products.index')
+            ->with('success', 'Producto creado correctamente');
+
     }
 
     public function show(Product $product)
@@ -43,8 +71,30 @@ class ProductController extends Controller
 
     public function update(UpdateProductRequest $request, Product $product)
     {
-        $product->update($request->all());
-        return redirect()->route('products.index')->with('success', 'Product updated successfully');
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            // Borra la anterior si existe
+            if ($product->image && File::exists(public_path($product->image))) {
+                File::delete(public_path($product->image));
+            }
+
+            $imagesPath = public_path('assets/images');
+            if (!File::exists($imagesPath)) {
+                File::makeDirectory($imagesPath, 0755, true);
+            }
+
+            $img = $request->file('image');
+            $name = time() . '.' . $img->getClientOriginalExtension();
+            $img->move($imagesPath, $name);
+
+            $data['image'] = 'assets/images/' . $name;
+        }
+
+        $product->update($data);
+
+        return redirect()->route('products.index')
+            ->with('success', 'Producto actualizado correctamente');
     }
 
     public function destroy(Product $product)

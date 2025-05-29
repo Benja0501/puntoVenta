@@ -1,5 +1,5 @@
         <footer class="app-footer">
-            <div class="float-end d-none d-sm-inline">Anything you want</div>
+            {{-- <div class="float-end d-none d-sm-inline">Anything you want</div> --}}
             <strong>
                 Copyright &copy; 2025&nbsp;
                 <a href="https://github.com/Benja0501/puntoVenta.git" class="text-decoration-none">Felix Angulo
@@ -16,8 +16,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
             integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
         </script>
-        <script src="{{ 'dist/js/adminlte.js' }}"></script>
-        <script src="{{ 'dist/js/fontawesome.js' }}"></script>
+        <script src="{{ asset('dist/js/adminlte.js') }}"></script>
+        <script src="{{ asset('dist/js/fontawesome.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.min.js"
             integrity="sha256-+vh8GkaU7C9/wbSLIcwq82tQ2wTf44aOHA8HlBMwRI8=" crossorigin="anonymous"></script>
         </body>

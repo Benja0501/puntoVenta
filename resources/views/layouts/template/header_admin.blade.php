@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/dataTable.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables-res.css') }}" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-    <link rel="shortcut icon" href="{{ 'dist/assets/img/tienda_sin_letras.png' }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('dist/assets/img/tienda_sin_letras.png')}}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
         integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/styles/overlayscrollbars.min.css"
@@ -51,14 +51,14 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img src="../../dist/assets/img/user2-160x160.jpg" class="user-image rounded-circle shadow"
                                 alt="User Image" />
-                            <span class="d-none d-md-inline">Alexander Pierce</span>
+                            <span class="d-none d-md-inline">Felix Angulo Nizama</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                             <li class="user-header text-bg-primary">
                                 <img src="../../dist/assets/img/user2-160x160.jpg" class="rounded-circle shadow"
                                     alt="User Image" />
                                 <p>
-                                    Alexander Pierce - Web Developer
+                                    Felix Angulo Nizama - Web Developer
                                     <small>Member since Nov. 2023</small>
                                 </p>
                             </li>

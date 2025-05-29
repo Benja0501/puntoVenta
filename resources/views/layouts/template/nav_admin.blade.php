@@ -5,7 +5,7 @@
         <!--begin::Brand Link-->
         <a href="{{ 'dashboard' }}" class="brand-link">
             <!--begin::Brand Image-->
-            <img src="{{ 'dist/assets/img/tienda_sin_letras.png' }}" alt="Tienda Logo"
+            <img src="{{ asset('dist/assets/img/tienda_sin_letras.png')}}" alt="Tienda Logo"
                 class="brand-image opacity-75 shadow" />
             <!--end::Brand Image-->
             <span class="brand-text fw-light">JEMP</span>
@@ -42,13 +42,19 @@
                                 <p>Categorías</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('products.index') }}" class="nav-link">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Productos</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 {{-- Fin de categorias --}}
                 <li class="nav-item">
                     <a href="{{ route('providers.index') }}" class="nav-link active">
-                        <i class="nav-icon bi bi-speedometer"></i>
-                        <p>Dashboard</p>
+                        <i class="nav-icon fa-solid fa-users"></i>
+                        <p>Proveedores</p>
                     </a>
                 </li>
             </ul>
