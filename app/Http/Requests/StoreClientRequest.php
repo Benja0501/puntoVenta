@@ -24,10 +24,10 @@ class StoreClientRequest extends FormRequest
         return [
             'name' => 'string|required|max:255',
             'dni' => 'string|required|unique:clients,dni|max:8|min:8',
-            'ruc' => 'string|unique:clients,ruc|max:11|min:11',
-            'address' => 'string|max:255',
-            'phone' => 'string|max:9|min:9|unique:clients,phone',
-            'email' => 'string|email|max:255|unique:clients,email|email:rfc,dns',
+            'ruc' => 'nullable|string|unique:clients,ruc|max:11|min:11',
+            'address' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:9|min:9|unique:clients,phone',
+            'email' => 'nullable|string|email|max:255|unique:clients,email|email:rfc,dns',
         ];
     }
 

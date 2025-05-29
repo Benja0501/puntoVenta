@@ -24,10 +24,10 @@ class UpdateClientRequest extends FormRequest
         return [
             'name' => 'string|required|max:255',
             'dni' => 'string|required|unique:clients,dni,'.$this->route('client')->id.'|max:8|min:8',
-            'ruc' => 'string|unique:clients,ruc,'.$this->route('client')->id.'|max:11|min:11',
+            'ruc' => 'nullable|string|unique:clients,ruc,'.$this->route('client')->id.'|max:11|min:11',
             'address' => 'nullable|string|max:255',
-            'phone' => 'string|nullable|max:9|min:9|unique:clients,phone,'.$this->route('client')->id,
-            'email' => 'string|nullable|email|max:255|unique:clients,email,'.$this->route('client')->id.'|email:rfc,dns',
+            'phone' => 'nullable|string|nullable|max:9|min:9|unique:clients,phone,'.$this->route('client')->id,
+            'email' => 'nullable|string|nullable|email|max:255|unique:clients,email,'.$this->route('client')->id.'|email:rfc,dns',
         ];
     }
     public function messages(): array
