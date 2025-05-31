@@ -1,7 +1,18 @@
+
+
 {{-- resources/views/admin/sale/create.blade.php --}}
 @include('layouts.template.header_admin')
 
 <main class="app-main">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $msg)
+                <li>{{ $msg }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <!-- Cabecera -->
     <div class="app-content-header">
         <div class="container-fluid">

@@ -58,7 +58,18 @@ class PurchaseController extends Controller
                 'price' => $request->price[$i],
             ]);
         }
-
+        // 7) Aquí es donde actualizaremos el stock de cada producto
+        //    (recorremos nuevamente los product_id y quantity para sumarlos al stock actual)
+        foreach ($request->product_id as $i => $prodId) {
+            $qty = $request->quantity[$i] ?? 0;
+            if ($qty > 0) {
+                $product = Product::find($prodId);
+                if ($product) {
+                    $product->stock += $qty;
+                    $product->save();
+                }
+            }
+        }
         return redirect()
             ->route('purchases.index')
             ->with('success', 'Compra registrada correctamente');

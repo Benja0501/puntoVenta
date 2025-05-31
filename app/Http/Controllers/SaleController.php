@@ -27,7 +27,39 @@ class SaleController extends Controller
     {
         // 1) Validar campos del formulario (client_id, tax, Arrays de product_id[], quantity[], price[], discount[])
         $data = $request->validated();
+        // 1.1) Antes de seguir: revisamos stock para cada línea
+        foreach ($request->product_id as $i => $prodId) {
+            $qty = $request->quantity[$i] ?? 0;
+            if ($qty <= 0) {
+                // Si por alguna razón la cantidad es 0 o negativa, lo interpretamos como inválido
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->withErrors(['quantity.' . $i => 'La cantidad debe ser al menos 1.']);
+            }
 
+            // Obtenemos el producto
+            $product = Product::find($prodId);
+            if (!$product) {
+                // Producto inexistente (validación extra de seguridad)
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->withErrors(['product_id.' . $i => 'El producto seleccionado no existe.']);
+            }
+
+            // Comprobamos stock
+            if ($product->stock < $qty) {
+                // No hay stock suficiente: devolvemos error indicando el nombre del producto y el stock disponible
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->withErrors([
+                        'quantity.' . $i => "No hay stock suficiente para «{$product->name}». 
+                        Stock disponible: {$product->stock}, se solicitó: {$qty}."
+                    ]);
+            }
+        }
         // 2) Agregar user_id + fecha actual
         $data['user_id'] = auth()->id();
         $data['sale_date'] = now();
@@ -67,6 +99,19 @@ class SaleController extends Controller
             ];
         }
         $sale->saleDetails()->createMany($lines);
+
+        // 6) **ACTUALIZAR STOCK**: restamos la cantidad vendida de cada producto
+        foreach ($request->product_id as $i => $prodId) {
+            $qty = $request->quantity[$i] ?? 0;
+            if ($qty > 0) {
+                $product = Product::find($prodId);
+                if ($product) {
+                    $product->stock -= $qty;
+                    // Como ya comprobamos que stock >= qty, no puede quedar en negativo
+                    $product->save();
+                }
+            }
+        }
 
         return redirect()
             ->route('sales.index')
