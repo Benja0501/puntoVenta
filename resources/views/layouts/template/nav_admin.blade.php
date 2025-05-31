@@ -71,6 +71,15 @@
                         <p>Clientes</p>
                     </a>
                 </li>
+
+                {{-- Compras --}}
+                <li class="nav-item">
+                    <a href="{{ route('purchases.index') }}"
+                        class="nav-link {{ request()->routeIs('purchases.*') ? 'active' : '' }}">
+                        <i class="nav-icon fa-solid fa-cart-shopping"></i>
+                        <p>Compras</p>
+                    </a>
+                </li>
             </ul>
             <!--end::Sidebar Menu-->
         </nav>

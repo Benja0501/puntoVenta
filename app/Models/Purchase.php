@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 class Purchase extends Model
 {
     use HasFactory;
@@ -18,7 +17,9 @@ class Purchase extends Model
         'status',
         'picture',
     ];
-    
+    protected $casts = [
+        'purchase_date' => 'datetime',
+    ];
     public function provider()
     {
         return $this->belongsTo(Provider::class);
@@ -29,6 +30,6 @@ class Purchase extends Model
     }
     public function purchaseDetails()
     {
-        return $this->hasMany(PurchaseDetail::class);
+        return $this->hasMany(PurchaseDetails::class, 'shopping_id');
     }
 }
