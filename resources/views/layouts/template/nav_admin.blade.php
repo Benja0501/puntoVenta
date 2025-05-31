@@ -80,6 +80,15 @@
                         <p>Compras</p>
                     </a>
                 </li>
+
+                {{-- Ventas --}}
+                <li class="nav-item">
+                    <a href="{{ route('sales.index') }}"
+                        class="nav-link {{ request()->routeIs('sales.*') ? 'active' : '' }}">
+                        <i class="nav-icon fa-solid fa-dollar-sign"></i>
+                        <p>Ventas</p>
+                    </a>
+                </li>
             </ul>
             <!--end::Sidebar Menu-->
         </nav>

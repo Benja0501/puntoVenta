@@ -16,7 +16,10 @@ class Sale extends Model
         'total',
         'status',
     ];
-
+    // Agrega este bloque de “casts” si no lo tienes ya
+    protected $casts = [
+        'sale_date' => 'datetime',
+    ];
     public function client()
     {
         return $this->belongsTo(Client::class);

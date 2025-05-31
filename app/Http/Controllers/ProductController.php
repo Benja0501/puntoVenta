@@ -33,29 +33,29 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request)
     {
+        // 1) Validamos todos los campos (incluido el archivo 'image')
         $data = $request->validated();
 
+        // 2) Si subieron imagen, la movemos a public/assets/images/
         if ($request->hasFile('image')) {
-            // Asegúrate de que existe public/assets/images
             $imagesPath = public_path('assets/images');
             if (!File::exists($imagesPath)) {
                 File::makeDirectory($imagesPath, 0755, true);
             }
-
             $img = $request->file('image');
             $name = time() . '.' . $img->getClientOriginalExtension();
             $img->move($imagesPath, $name);
-
-            // Guardamos la ruta relativa
             $data['image'] = 'assets/images/' . $name;
         }
 
+        // 3) Creamos el producto con todos los campos (code, name, stock, image, sell_price, status, category_id, provider_id)
         Product::create($data);
 
         return redirect()->route('products.index')
             ->with('success', 'Producto creado correctamente');
-
     }
+
+
 
     public function show(Product $product)
     {
