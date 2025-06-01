@@ -25,9 +25,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('products', ProductController::class)->names('products');
     Route::resource('providers', ProviderController::class)->names('providers');
     Route::resource('purchases', PurchaseController::class)->names('purchases');
-
-
     Route::resource('sales', SaleController::class)->names('sales');
+    // Ruta para generar/mostrar el PDF:
+    Route::get('purchases/{purchase}/pdf', [PurchaseController::class, 'pdf'])
+        ->name('purchases.pdf');
+    Route::get('sales/{sale}/pdf', [SaleController::class, 'pdf'])
+        ->name('sales.pdf');
 
     Route::get('/dashboard', function () {
         return view('layouts.admin');

@@ -15,6 +15,7 @@ class Provider extends Model
         'ruc_number',
         'address',
         'phone',
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ];
 
     public function products()

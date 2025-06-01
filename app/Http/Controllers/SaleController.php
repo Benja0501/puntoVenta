@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\Product;
 use App\Http\Requests\StoreSaleRequest;
 use App\Http\Requests\UpdateSaleRequest;
+use PDF;
 
 class SaleController extends Controller
 {
@@ -139,4 +140,11 @@ class SaleController extends Controller
     {
         //
     }
+    public function pdf(Sale $sale)
+    {
+        $pdf = PDF::loadView('admin.sale.pdf', compact('sale'))
+            ->setPaper('a4', 'portrait');
+        return $pdf->stream("venta_{$sale->id}.pdf");
+    }
+
 }

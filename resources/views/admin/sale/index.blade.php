@@ -48,10 +48,14 @@
                                     <a href="{{ route('sales.show', $sale) }}" class="btn btn-sm btn-info">
                                         <i class="fa fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('sales.edit', $sale) }}" class="btn btn-sm btn-primary">
+                                    {{-- <a href="{{ route('sales.edit', $sale) }}" class="btn btn-sm btn-primary">
                                         <i class="fa fa-edit"></i>
+                                    </a> --}}
+                                    {{-- PDF: abrimos en nueva pestaña/ventana (target="_blank") --}}
+                                    <a href="{{ route('sales.pdf', $sale) }}" class="btn btn-sm btn-danger"
+                                        target="_blank" title="Descargar PDF">
+                                        <i class="fa fa-file-pdf"></i>
                                     </a>
-                                    {{-- Aquí podrías agregar un formulario para eliminar --}}
                                 </td>
                             </tr>
                         @endforeach
@@ -68,5 +72,3 @@
 <script src="{{ asset('assets/js/sale.js') }}"></script>
 
 @include('layouts.template.footer_admin')
-
-

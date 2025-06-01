@@ -53,14 +53,27 @@
                                         <a href="{{ route('purchases.show', $pur) }}" class="btn btn-sm btn-info">
                                             <i class="fa fa-eye"></i>
                                         </a>
-                                        <!-- Edit -->
+                                        {{-- <!-- Edit -->
                                         <button class="btn btn-sm btn-primary btn-edit-purchase" data-bs-toggle="modal"
                                             data-bs-target="#purchaseModalEdit" data-id="{{ $pur->id }}"
                                             data-provider-id="{{ $pur->provider_id }}"
                                             data-user-id="{{ $pur->user_id }}" data-date="{{ $pur->purchase_date }}"
                                             data-tax="{{ $pur->tax }}" data-total="{{ $pur->total }}"
-                                            data-status="{{ $pur->status }}"><i class="fa fa-edit"></i></button>
+                                            data-status="{{ $pur->status }}"><i class="fa fa-edit"></i></button> --}}
 
+                                        {{-- <!-- Delete -->
+                                        <form action="{{ route('purchases.destroy', $pur) }}" method="POST"
+                                            style="display:inline">
+                                            @csrf @method('DELETE')
+                                            <button class="btn btn-sm btn-danger"
+                                                onclick="return confirm('Eliminar compra?')">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form> --}}
+                                        <a href="{{ route('purchases.pdf', $pur) }}" class="btn btn-sm btn-secondary"
+                                            title="Descargar PDF">
+                                            <i class="fa fa-file-pdf"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

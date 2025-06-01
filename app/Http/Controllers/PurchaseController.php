@@ -8,6 +8,7 @@ use App\Models\Provider;
 use App\Models\Product;
 use App\Http\Requests\StorePurchaseRequest;
 use App\Http\Requests\UpdatePurchaseRequest;
+use PDF;
 
 class PurchaseController extends Controller
 {
@@ -98,4 +99,12 @@ class PurchaseController extends Controller
     {
         // …
     }
+    public function pdf(Purchase $purchase)
+    {
+        $purchase->load(['provider', 'user', 'purchaseDetails.product']);
+        $pdf = \PDF::loadView('admin.purchase.pdf', ['purchase' => $purchase]);
+        $filename = 'compra_' . str_pad($purchase->id, 4, '0', STR_PAD_LEFT) . '.pdf';
+        return $pdf->download($filename);
+    }
+
 }
